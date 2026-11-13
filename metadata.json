@@ -1,0 +1,6 @@
+{
+  "name": "CHECKMATE – AI Chess Academy",
+  "description": "Android-first interactive chess learning academy, daily puzzles, opening library, and AI chess coach.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
