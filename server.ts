@@ -9,6 +9,7 @@ const __dirname = path.dirname(__filename);
 
 const PORT = Number(process.env.PORT || 3000);
 const isProd = process.env.NODE_ENV === 'production';
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-4-hydrogen';
 
 function getGeminiClient(): GoogleGenAI | null {
   const apiKey = process.env.GEMINI_API_KEY;
@@ -81,7 +82,7 @@ async function startServer() {
         .join('\n');
 
       const response = await ai.models.generateContent({
-        model: 'gemini-4-hydrogen',
+        model: GEMINI_MODEL,
         contents: prompt,
         config: {
           thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
@@ -144,7 +145,7 @@ async function startServer() {
         .join('\n');
 
       const response = await ai.models.generateContent({
-        model: 'gemini-4-hydrogen',
+        model: GEMINI_MODEL,
         contents: prompt,
         config: {
           thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
@@ -189,7 +190,7 @@ async function startServer() {
   } else {
     const distPath = path.resolve(__dirname, 'dist');
     app.use(express.static(distPath));
-    app.get('/{*splat}', (_req, res) => {
+    app.get('*', (_req, res) => {
       res.sendFile(path.join(distPath, 'index.html'));
     });
   }
